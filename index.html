@@ -7,6 +7,103 @@
     <title>Document</title>
 </head>
 <body>
-    this is the first one!
+    <button class="sina">sina</button>
+    <button class="qqzone">qqzone</button>
+    <button class="qq">qq</button>
 </body>
 </html>
+<script src="./jquery-2.0.3.min.js"></script>
+<script src="./NativeShare.js"></script>
+
+<script>
+    //微博分享
+    function wbshare() {
+        var sina_index = parseInt($('.sina').attr('sina-index'));
+        var title = "";//填标题
+        var sina_title = [""];//填标题
+        var image = '';//要分享的图片
+        var site = '';//要分享的网址
+
+        var sina_url = 'http://service.weibo.com/share/share.php' +
+            '?title=' + encodeURIComponent(title) +
+            '&url=' + site +
+            '&site=' + site +
+            '&ralateUid=' +
+            '&appkey=160481926' +
+            '&pic=' + image +
+            '&searchPic=';
+
+        window.open(sina_url, '', 'width=700, height=480, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no');
+
+    }
+
+    //qq空间分享
+    function qzshare() {
+        var title = '',
+            image = '',
+            site = '';
+
+        var qz_url = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?' +
+            '?title=' + encodeURIComponent(title) +
+            '&url=' + site +
+            '&site=' + site +
+            '&pics=' + image +
+            '&searchPic=';
+        window.open(qz_url, '', 'width=700, height=480, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no');
+
+    };
+    //qq分享
+    function qqshare() {
+        var title = '',
+            image = '',
+            site = 'http://www.baidu.com/xxx/index.html',
+            source = 'http://www.baidu.com',
+            description = "",
+            weiTitle = "";
+        var qq_url = 'http://connect.qq.com/widget/shareqq/index.html?' +
+            '?title=' + encodeURIComponent(title) +
+            '&url=' + site +
+            '&source=' + source +
+            '&desc=' + encodeURIComponent(description) +
+            '&pics=' + image +
+            '&summary=';
+
+        var nativeShare = new NativeShare();
+        var shareData = {
+            title: '',//填标题
+            desc: '',//填描述
+            // 如果是微信该link的域名必须要在微信后台配置的安全域名之内的。
+            link: '',//要分享的网址
+            icon: '',//要分享的图片
+        };
+        nativeShare.setShareData(shareData);
+        if($(window).width()>768){
+            window.open(qq_url, '', 'width=700, height=480, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no');
+        }else{
+            nativeShare.call('qqFriend');
+        }
+    
+
+
+    };
+
+    function onWbShare() {
+        $('.sina').on('click', function () {
+            wbshare();
+        });
+    };
+
+    function onQzShare() {
+        $('.qqzone').on('click', function () {
+            qzshare();
+        });
+    };
+    function onqqShare() {
+        $('.qq').on('click', function () {
+            qqshare();
+        });
+    };
+    onWbShare();
+    onQzShare();
+    onqqShare();
+</script>
