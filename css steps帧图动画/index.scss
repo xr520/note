@@ -1,0 +1,38 @@
+@keyframes changecolor {
+    0% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
+    to {
+        -webkit-transform: translate(0, -90.909%);
+        transform: translate(0, -90.909%);
+    }
+}
+@-webkit-keyframes changecolor {
+    0% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
+    to {
+        -webkit-transform: translate(0, -90.909%);
+        transform: translate(0, -90.909%);
+    }
+}
+
+.phone{
+    width:6.72rem;
+    height: 8.39rem;
+    overflow: hidden;
+    img{
+     width: 6.72rem;
+     height:1100%;
+    }
+    img.changecolor {
+     -webkit-animation: changecolor 5s steps(10);
+     animation: changecolor 5s steps(10);
+     -webkit-animation-fill-mode: forwards;
+     animation-fill-mode: forwards;
+ }
+    
+
+ }

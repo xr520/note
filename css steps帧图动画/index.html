@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+        var ww = window.innerWidth;
+        var defaultSize = window.getComputedStyle(document.documentElement).getPropertyValue("font-size");
+        var fontBase = (ww <= 1080) ? 1080 : 2560;
+        var fontSize = 100 * ww / fontBase;
+        var targetSize = fontSize / parseFloat(defaultSize) * 100 + "%";
+        document.documentElement.style.fontSize = targetSize;
+    </script>
+    <script type="text/javascript">
+        window.lazySizesConfig = window.lazySizesConfig || {};
+        window.lazySizesConfig.customMedia = {
+            'md': '(max-width: 1080px)',
+            'lg': '(min-width: 1081px)',
+        };
+    </script>
+</head>
+<body>
+    <div class="phone">
+        <picture>
+            <!--[if IE 9]><video style="display: none"><![endif]-->
+            <source data-srcset="images/products/m/sec155.jpg" media="md" />
+            <!--[if IE 9]></video><![endif]-->
+            <img data-src="images/products/sec155.jpg" class="lazyload"/>
+        </picture>
+    </div>
+</body>
+</html>

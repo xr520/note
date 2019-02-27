@@ -1,0 +1,10 @@
+.desc {
+    color: #fff;
+    font-size: .32rem;
+    line-height: .4rem;
+    font-weight: 600;
+    display: inline-block;
+    background-image: -webkit-linear-gradient(left, #1659e2, #eb2eab);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
