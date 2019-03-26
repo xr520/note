@@ -14,8 +14,60 @@
 </html>
 <script src="./jquery-2.0.3.min.js"></script>
 <script src="./NativeShare.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 <script>
+    //微信分享
+    var Wechat = Wechat || {};
+        Wechat = {
+            config: {
+                debug: false,
+                appId: '',
+                timestamp: '',
+                nonceStr: '',
+                signature: '',
+                jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo']
+            },
+            share: {
+                title: '',//填标题
+                desc: '',//填分享描述
+                link: window.location.href,
+                imgUrl: '',//填分享图片
+                success: function () {},
+                cancel: function () {}
+            },
+            getConfig: function () {
+                $.ajax({
+                    url: window.location.protocol + '//**/weixin/share',//分享请求的接口
+                    type: 'GET',
+                    dataType: 'jsonp',
+                    data: {
+                        '_request_key': 1
+                    },
+                    jsonp: 'jsoncallback',
+                }).done(function (data) {
+                    if (data.no != 0) return false;
+                    $.extend(Wechat.config, data.data);
+                    wx.config(Wechat.config);
+                }).always(function () {});
+            },
+            onMenuShare: function () {
+                wx.ready(function () {
+                    wx.onMenuShareTimeline(Wechat.share);
+                    wx.onMenuShareAppMessage(Wechat.share);
+                    wx.onMenuShareQQ(Wechat.share);
+                    wx.onMenuShareWeibo(Wechat.share);
+                });
+                wx.error(function (res) {});
+            },
+            init: function () {
+                this.getConfig();
+                this.onMenuShare();
+            }
+        };
+        Wechat.init();
+
+
     //微博分享
     function wbshare() {
         var sina_index = parseInt($('.sina').attr('sina-index'));
@@ -106,4 +158,6 @@
     onWbShare();
     onQzShare();
     onqqShare();
+
+
 </script>
